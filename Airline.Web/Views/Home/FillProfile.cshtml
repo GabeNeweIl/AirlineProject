@@ -1,0 +1,52 @@
+﻿@model Airline.Web.Models.ProfileViewModel
+@{
+    ViewBag.Title = "Create Profile";
+}
+@Styles.Render("~/Content/FillProfile.css")
+<div class="row">
+    <div class="col">
+        <h1 class="title">First of all you need to create a profile</h1>
+        <h4 class="title">Fill in the gaps to create a profile</h4>
+        <div class="col-8">
+            @using (Html.BeginForm("FillProfile", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Surname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Birth, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Birth, new { @type = "Date", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Birth, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.PassportID, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.PassportID, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.PassportID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn-dark" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

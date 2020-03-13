@@ -1,5 +1,5 @@
 ﻿using Airline.DAL.Repository;
-using Airline.DAL.Entities;
+using Airline.Models.Models;
 
 namespace Airline.DAL.UnitOfWork
 {

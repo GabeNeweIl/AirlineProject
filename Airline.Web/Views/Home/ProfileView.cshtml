@@ -1,0 +1,28 @@
+﻿@model Airline.Models.Models.Profile
+@{
+    ViewBag.Title = "Profile";
+}
+@Styles.Render("~/Content/ProfileView.css")
+ <div class="row">
+     <div class="col-6">
+         <h2>Your personal information</h2>
+         <div class="card">
+             <div class="card-body">
+                 <div class="float-left">
+                     <h6>Email: <span>@Model.Email</span></h6>
+                     <h6>Name: <span>@Model.Name</span></h6>
+                     <h6>Surname: <span>@Model.Surname</span></h6>
+                 </div>
+                 <div class="float-right">
+                     <h6>PassportID: <span>@Model.PassportID</span></h6>
+                     <h6>Date of Birth <span>@Model.Birth.ToShortDateString()</span></h6>
+                 </div>
+             </div>
+         </div>
+         <div class="btn-block">
+             @Html.ActionLink("Your Booking","UserBooking","Home",null,new { @class="btn"})
+             @Html.ActionLink("Change personal information","UserEdit","Home",null,new { @class="btn"})
+             @Html.ActionLink("Change Password","ChangePassword","Manage",null,new { @class="btn"})
+         </div>
+     </div>
+ </div>

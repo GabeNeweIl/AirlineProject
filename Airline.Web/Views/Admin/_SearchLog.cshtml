@@ -1,0 +1,14 @@
+﻿
+<div class="card">
+    <div class="card-body">
+        @using (Html.BeginForm("SearchLog", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="form-group">
+                @Html.TextBox("search", null, new { @class = "form-control", @placeholder = "Search" })
+            </div>
+            <div>
+                <input type="submit" value="Search" class="btn-dark search-btn" />
+            </div>
+        }
+    </div>
+</div>

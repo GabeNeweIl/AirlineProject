@@ -1,0 +1,58 @@
+﻿@using Airline.Models.Models
+@using Airline.Web.App_Code
+@model Airline.Web.Models.PageViewMdodel
+@{
+    ViewBag.Title = "Flights";
+}
+
+@Styles.Render("~/Content/AllFlights.css")
+@Styles.Render("~/Content/AllFlightsAdmin.css")
+<div class="row">
+    <div class="col-md-7">
+        <h2 class="title">Flights</h2>
+        <p style="padding-bottom: 10px;">@Html.Partial("_SortView")</p>
+        <form action="NewFlight">
+            <p><input type="submit" value="New Flight" class="btn" /></p>
+        </form>
+        <div class="my-card">
+            @foreach (Flight flight in Model.Flights)
+            {
+                if (flight.Departure > DateTime.Now)
+                {
+                    <div class="block">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="float-left">
+                                    <h6>№: <span>@flight.Id</span></h6>
+                                    <h6>From Country: <span>@flight.FromCountry</span></h6>
+                                    <h6>From City: <span>@flight.FromCity</span></h6>
+                                    <h6>Departure: <span>@flight.Departure.ToShortDateString()</span></h6>
+                                </div>
+                                <div class="float-right">
+                                    <h6>To Country: <span>@flight.ToCountry</span></h6>
+                                    <h6>To City: <span>@flight.ToCity</span></h6>
+                                    <h6>Arrival: <span>@flight.Arrival.ToShortDateString()</span></h6>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="float-left">
+                                    <h6>Total number of passenger seats: <span>@flight.TotalNumberPassengers</span></h6>
+                                    <h6>Empty seats left: <span>@(flight.TotalNumberPassengers - flight.CurrentNumberPassengers)</span></h6>
+                                </div>
+                                <div class="float-right">
+                                    <h6>Price for seat: <span class="price">@flight.Price USD</span></h6>
+                                </div>
+                            </div>
+                        </div>
+                        @Html.ActionLink("More", "More", "Home", new { Id = flight.Id }, new { @class = "btn float-right assign" })
+                    </div>
+                }
+            }
+        </div>
+            <div class="btn-group">
+                @Html.PageLinks(Model.Page, x => Url.Action("SortAscendingPrice", "Home", new { page = x }))
+            </div>
+    </div>
+</div>
+
+

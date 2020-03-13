@@ -1,0 +1,29 @@
+﻿
+@{
+    ViewBag.Title = "Dispatcher Panel";
+}
+@Styles.Render("~/Content/Panel.css")
+<div class="container-fluid">
+    <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Crew Assigment</h6>
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Crew Assigment", "AllFlightsDispatcher", "Dispatcher")
+                    </div>
+                </div>
+            
+                <div class="card">
+                    <div class="card-header">
+                        <h6>Send Request to Admin</h6>
+                    </div>
+                    <div class="card-body">
+                        @Html.ActionLink("Send Request", "SendRequest", "Dispatcher")
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+

@@ -1,0 +1,14 @@
+﻿.card {
+    margin: 20px auto;
+    text-align: center;
+}
+
+.col-md-6 {
+    margin: 0 auto;
+}
+.row {
+    text-align: center;
+}
+.table {
+    text-align: left;
+}

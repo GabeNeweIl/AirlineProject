@@ -1,0 +1,16 @@
+﻿.row {
+    text-align: center;
+}
+
+.col {
+    margin: 0, auto;
+}
+.title {
+    padding-bottom: 25px;
+}
+.subTitle {
+    padding-top: 25px;
+}
+.list {
+    padding-top: 25px;
+}

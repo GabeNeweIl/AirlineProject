@@ -19,7 +19,7 @@
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
     <Use64BitIISExpress />
-    <IISExpressSSLPort>44391</IISExpressSSLPort>
+    <IISExpressSSLPort>44334</IISExpressSSLPort>
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
@@ -51,9 +51,25 @@
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Ninject, Version=3.3.4.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.3.4\lib\net45\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common, Version=3.3.2.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.3.3.2\lib\net45\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common.WebHost, Version=3.3.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.Web.Common.WebHost.3.3.0\lib\net45\Ninject.Web.Common.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.6.8\lib\net45\NLog.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -167,31 +183,71 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\PagingHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
+    <Compile Include="Controllers\DispatcherController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminViewModells.cs" />
+    <Compile Include="Models\DispatcherViewModels.cs" />
+    <Compile Include="Models\GeneralViewModel.cs" />
+    <Compile Include="Models\HomeViewModel.cs" />
     <Compile Include="Models\IdentityInitializer.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\About.css" />
+    <Content Include="Content\Admin.css" />
+    <Content Include="Content\AllFlights.css" />
+    <Content Include="Content\AllFlightsAdmin.css" />
+    <Content Include="Content\allLogs.css" />
     <Content Include="Content\bootstrap-grid.css" />
     <Content Include="Content\bootstrap-grid.min.css" />
     <Content Include="Content\bootstrap-reboot.css" />
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\ChangePassword.css" />
+    <Content Include="Content\Contacts.css" />
+    <Content Include="Content\FillProfile.css" />
+    <Content Include="Content\img\background.jpg" />
+    <Content Include="Content\img\facebook.svg" />
+    <Content Include="Content\img\favicon\android-chrome-192x192.png" />
+    <Content Include="Content\img\favicon\android-chrome-256x256.png" />
+    <Content Include="Content\img\favicon\apple-touch-icon.png" />
+    <Content Include="Content\img\favicon\browserconfig.xml" />
+    <Content Include="Content\img\favicon\favicon-16x16.png" />
+    <Content Include="Content\img\favicon\favicon-32x32.png" />
+    <Content Include="Content\img\favicon\favicon.ico" />
+    <Content Include="Content\img\favicon\mstile-150x150.png" />
+    <Content Include="Content\img\favicon\safari-pinned-tab.svg" />
+    <Content Include="Content\img\github.svg" />
+    <Content Include="Content\img\instagram.svg" />
+    <Content Include="Content\img\logo-plane.png" />
+    <Content Include="Content\img\skype.png" />
+    <Content Include="Content\img\skype.svg" />
+    <Content Include="Content\img\Top.svg" />
+    <Content Include="Content\img\vk.png" />
+    <Content Include="Content\img\vk.svg" />
+    <Content Include="Content\main.css" />
+    <Content Include="Content\Panel.css" />
+    <Content Include="Content\ProfileView.css" />
+    <Content Include="Content\UserBooking.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -199,15 +255,6 @@
     <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\esm\popper-utils.js" />
-    <Content Include="Scripts\esm\popper-utils.min.js" />
-    <Content Include="Scripts\esm\popper.js" />
-    <Content Include="Scripts\esm\popper.min.js" />
-    <Content Include="Scripts\index.js.flow" />
-    <Content Include="Scripts\esm\popper.min.js.map" />
-    <Content Include="Scripts\esm\popper.js.map" />
-    <Content Include="Scripts\esm\popper-utils.min.js.map" />
-    <Content Include="Scripts\esm\popper-utils.js.map" />
     <Content Include="Scripts\bootstrap.min.js.map" />
     <Content Include="Scripts\bootstrap.js.map" />
     <Content Include="Scripts\bootstrap.bundle.min.js.map" />
@@ -218,6 +265,23 @@
     <Content Include="Content\bootstrap-reboot.css.map" />
     <Content Include="Content\bootstrap-grid.min.css.map" />
     <Content Include="Content\bootstrap-grid.css.map" />
+    <Content Include="Content\img\favicon\site.webmanifest" />
+    <Content Include="Scripts\esm\popper-utils.js" />
+    <Content Include="Scripts\esm\popper-utils.min.js" />
+    <Content Include="Scripts\esm\popper.js" />
+    <Content Include="Scripts\esm\popper.min.js" />
+    <Content Include="Scripts\index.js.flow" />
+    <Content Include="Scripts\esm\popper.min.js.map" />
+    <Content Include="Scripts\esm\popper.js.map" />
+    <Content Include="Scripts\esm\popper-utils.min.js.map" />
+    <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="logs\Logs.log" />
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -335,6 +399,32 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Account\DisplayEmail.cshtml" />
+    <Content Include="Views\Admin\AllCrewMembers.cshtml" />
+    <Content Include="Views\Admin\NewCrewMember.cshtml" />
+    <Content Include="Views\Admin\AdminPanel.cshtml" />
+    <Content Include="Views\Admin\EditCrewMember.cshtml" />
+    <Content Include="Views\Shared\_AdminPartial.cshtml" />
+    <Content Include="Views\Admin\AllFlights.cshtml" />
+    <Content Include="Views\Admin\NewFlight.cshtml" />
+    <Content Include="Views\Admin\EditFlight.cshtml" />
+    <Content Include="Views\Admin\AllRequests.cshtml" />
+    <Content Include="Views\Dispatcher\DispatcherPanel.cshtml" />
+    <Content Include="Views\Dispatcher\SendRequest.cshtml" />
+    <Content Include="Views\Dispatcher\AllFlightsDispatcher.cshtml" />
+    <Content Include="Views\Shared\_DispatcherPartial.cshtml" />
+    <Content Include="Views\Dispatcher\AssignCrew.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Error\Forbidden.cshtml" />
+    <Content Include="Views\Error\ServerError.cshtml" />
+    <Content Include="Views\Home\NoResults.cshtml" />
+    <Content Include="Views\Admin\More.cshtml" />
+    <Content Include="Views\Dispatcher\More.cshtml" />
+    <Content Include="Views\Home\_Search.cshtml" />
+    <Content Include="Views\Home\_SearchByNumber.cshtml" />
+    <Content Include="Views\Home\SearchFailed.cshtml" />
+    <Content Include="Views\Shared\_Favicons.cshtml" />
+    <Content Include="Views\Home\AllFlights.cshtml" />
+    <Content Include="Views\Shared\_SortView.cshtml" />
     <Content Include="Scripts\umd\popper.min.js.map" />
     <Content Include="Scripts\umd\popper.js.map" />
     <Content Include="Scripts\umd\popper.js.flow" />
@@ -345,6 +435,25 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Dispatcher\EditCrew.cshtml" />
+    <Content Include="Views\Admin\SortDescendingId.cshtml" />
+    <Content Include="Views\Admin\SortAscendingId.cshtml" />
+    <Content Include="Views\Admin\SortDescendingPrice.cshtml" />
+    <Content Include="Views\Admin\SortAscendingPrice.cshtml" />
+    <Content Include="Views\Dispatcher\SortDescendingId.cshtml" />
+    <Content Include="Views\Dispatcher\SortAscendingId.cshtml" />
+    <Content Include="Views\Dispatcher\SortDescendingPrice.cshtml" />
+    <Content Include="Views\Dispatcher\SortAscendingPrice.cshtml" />
+    <Content Include="Views\Home\SortDescendingId.cshtml" />
+    <Content Include="Views\Home\SortAscendingId.cshtml" />
+    <Content Include="Views\Home\SortDescendingPrice.cshtml" />
+    <Content Include="Views\Home\SortAscendingPrice.cshtml" />
+    <Content Include="Views\Admin\AllLogs.cshtml" />
+    <Content Include="Views\Admin\_SearchLog.cshtml" />
+    <Content Include="Views\Home\ProfileView.cshtml" />
+    <Content Include="Views\Home\FillProfile.cshtml" />
+    <Content Include="Views\Home\UserBooking.cshtml" />
+    <Content Include="Views\Home\UserEdit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -355,9 +464,6 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <TypeScriptCompile Include="Scripts\index.d.ts" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
@@ -365,6 +471,13 @@
       <Project>{0de1be66-0bd4-40e7-bcca-2876a79851f4}</Project>
       <Name>Airline.BLL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Airline.Models\Airline.Models.csproj">
+      <Project>{a35f9e64-54d6-4538-88d7-67296dfecd41}</Project>
+      <Name>Airline.Models</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -385,7 +498,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>49902</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44391/</IISUrl>
+          <IISUrl>https://localhost:44334/</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>https://localhost:44334/</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

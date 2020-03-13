@@ -1,0 +1,69 @@
+﻿@using Airline.Models.Models
+@model Airline.Web.Models.AssignCrewViewModel
+@{
+    ViewBag.Title = "Edit Crew Assigment";
+}
+
+<div class="row">
+    <div class="col-md-10">
+        <h2>Crew Assigment</h2>
+        @using (Html.BeginForm("EditCrew", "Dispatcher", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <h5>Pilots: </h5>
+            foreach (CrewMember crew in ViewBag.AllCrewMembers)
+            {
+                <ul>
+                    @if (crew.Position.ToLower() == "pilot" && crew.IsDeleted)
+                    {
+                        <li>@Html.RadioButtonFor(model => model.PilotId, crew.Id)Name: @crew.Name, Surname: @crew.Surname </li>
+                    }
+
+                </ul>
+            }
+            @Html.ValidationMessageFor(m => m.PilotId, "", new { @class = "text-danger" })
+            <h5>Navigators: </h5>
+            foreach (CrewMember crew in ViewBag.AllCrewMembers)
+            {
+
+                <ul>
+                    @if (crew.Position.ToLower() == "navigator" && crew.IsDeleted)
+                    {
+                        <li>@Html.RadioButtonFor(model => model.NavigatorId, crew.Id)Name: @crew.Name, Surname: @crew.Surname </li>
+                    }
+                </ul>
+            }
+            @Html.ValidationMessageFor(m => m.NavigatorId, "", new { @class = "text-danger" })
+            <h5>Radio Operators: </h5>
+            foreach (CrewMember crew in ViewBag.AllCrewMembers)
+            {
+
+                <ul>
+                    @if (crew.Position.ToLower() == "radio operator" && crew.IsDeleted)
+                    {
+                        <li>@Html.RadioButtonFor(model => model.RadioOperatorId, crew.Id)Name: @crew.Name, Surname: @crew.Surname </li>
+                    }
+                </ul>
+            }
+            @Html.ValidationMessageFor(m => m.RadioOperatorId, "", new { @class = "text-danger" })
+            <h5>Stewardess: </h5>
+            foreach (CrewMember crew in ViewBag.AllCrewMembers)
+            {
+
+                <ul>
+                    @if (crew.Position.ToLower() == "stewardess" && crew.IsDeleted)
+                    {
+                        <li>@Html.RadioButtonFor(model => model.StewardessId, crew.Id)Name: @crew.Name, Surname: @crew.Surname </li>
+                    }
+                </ul>
+            }
+            @Html.ValidationMessageFor(m => m.StewardessId, "", new { @class = "text-danger" })
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Assign" class="btn-dark" />
+                </div>
+            </div>
+        }
+    </div>
+</div>

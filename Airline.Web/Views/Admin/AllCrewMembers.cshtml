@@ -1,0 +1,67 @@
+﻿@using Airline.Models.Models
+@{
+    ViewBag.Title = "Crew Members";
+}
+
+<div class="row">
+    <div class="col">
+        <h2>Crew Members</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Position</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Surname</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Change Status</th>
+                </tr>
+            </thead>
+            @foreach (CrewMember crew in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td>@crew.Id</td>
+                        <td>@crew.Position</td>
+                        <td>@crew.Name</td>
+                        <td>@crew.Surname</td>
+                        <td>@crew.Age</td>
+                        @if (crew.IsDeleted)
+                        {
+                            <td>Active</td>
+                        }
+                        else
+                        {
+                            <td>Inactive</td>
+                        }
+                        <th>@Html.ActionLink("Edit", "EditCrewMember", "Admin",new { Id = crew.Id }, new { @class = "submit" })</th>
+                        @if (crew.IsDeleted)
+                        {
+                            <th>
+                                @Html.ActionLink("Hide", "HideCrewMember", "Admin", new { id = crew.Id },
+                               new { onclick = "return confirm('Are you sure? Hiding will result in a status change - Inactive!')",
+                               @class = "submit"})
+                            </th>
+                        }
+                        else
+                        {
+                            <th>
+                                @Html.ActionLink("Restore", "RestoreCrewMember", "Admin",
+                               new { id = crew.Id },
+                               new{ onclick = "return confirm('Are you sure? Restorage will result in a status change - Active!')", @class = "submit"})
+                            </th>
+                        }
+                        <th>@Html.ActionLink("Delete","DeleteCrewMember","Admin",new { Id = crew.Id},
+                           new{ onclick = "return confirm('Are you sure?')", @class = "submit"})</th>
+                    </tr>
+                </tbody>
+            }
+        </table>
+        <form action="NewCrewMember">
+            <p><input type="submit" value="New Crew Member" /></p>
+        </form>
+    </div>
+</div>
+

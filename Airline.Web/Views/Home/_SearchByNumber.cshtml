@@ -1,0 +1,15 @@
+﻿@model Airline.Web.Models.SearchByNumber
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("SearchByNumber", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    <div class="form-group">
+                            @Html.TextBoxFor(m => m.Number, new { @class = "form-control", @placeholder = "Flight Number", @type="Numbers" })
+                            @Html.ValidationMessageFor(m => m.Number, "", new { @class = "text-danger" })
+                     </div>
+                     <div>
+                        <input type="submit" value="Search" class="btn-dark search-btn" />
+                     </div>
+                }
+            </div>
+        </div>

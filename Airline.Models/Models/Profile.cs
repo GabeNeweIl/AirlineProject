@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Airline.DAL.Entities
+namespace Airline.Models.Models
 {
     public class Profile
     {
@@ -13,8 +13,8 @@ namespace Airline.DAL.Entities
         public string Name { get; set; }
         public string Surname { get; set; }
         public string PassportID { get; set; } //номер пасспорта
-        public DateTime? Birth { get; set; } //дата рождения
-        public virtual List<Flight> Flights { get; set; }
+        public DateTime Birth { get; set; } //дата рождения
+        public virtual ICollection<Flight> Flights { get; set; }
         public Profile()
         {
             Flights = new List<Flight>();

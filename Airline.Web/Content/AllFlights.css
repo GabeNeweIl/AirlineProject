@@ -1,0 +1,36 @@
+﻿.card-header {
+    margin: 0 0;
+}
+span {
+    color: deepskyblue;
+}
+.col-md-7 {
+    margin: 0 auto;
+}
+.price {
+    color: red;
+}
+.card-body {
+    margin: 20px , 0;
+}
+.assign {
+    margin: 10px 10px 0 0;
+}
+.title {
+    padding-bottom: 20px;
+    text-align: center;
+}
+.else {
+    padding-top: 150px;
+    text-align: center;
+}
+.my-card {
+    padding-bottom: 30px;
+}
+.block {
+    padding-bottom: 55px;
+}
+.btn {
+    background-color: black;
+    color: white;
+}

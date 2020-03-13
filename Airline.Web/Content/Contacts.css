@@ -1,0 +1,25 @@
+﻿.row {
+    text-align: center;
+}
+.col {
+    margin: 0, auto;
+}
+.icons {
+    padding-top: 470px;
+}
+.icon {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.title {
+    padding-bottom:25px;
+}
+.emailInfo {
+    padding-top: 55px;
+}
+.map 
+{
+    border:  3px, solid;
+    border-radius: 2px;
+    border-color: black;
+}

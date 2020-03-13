@@ -1,0 +1,25 @@
+﻿@model Airline.Web.Models.Search
+    <div class="card">
+        <div class="card-body">
+            @using (Html.BeginForm("Search", "Home", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+             {
+                <div class="form-group">
+                    <div class="col text">
+                        @Html.TextBoxFor(m => m.From, new { @class = "form-control", @placeholder = "Departure City" })
+                        @Html.ValidationMessageFor(m => m.From, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col text">
+                        @Html.TextBoxFor(m => m.To, new { @class = "form-control", @placeholder = "City of arrival" })
+                        @Html.ValidationMessageFor(m => m.To, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col text">
+                        @Html.TextBoxFor(m => m.DateDeparture, new { @class = "form-control", @type = "Date", @placeholder = "Date of departure" })
+                        @Html.ValidationMessageFor(m => m.DateDeparture, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="col search-btn">
+                        <input type="submit" value="Search" class="btn-dark" />
+                    </div>
+                </div>
+             }
+        </div>
+    </div>    

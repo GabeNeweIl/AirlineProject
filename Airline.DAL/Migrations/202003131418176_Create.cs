@@ -3,7 +3,7 @@ namespace Airline.DAL.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class CreateBase : DbMigration
+    public partial class Create : DbMigration
     {
         public override void Up()
         {
@@ -33,7 +33,9 @@ namespace Airline.DAL.Migrations
                         ToCity = c.String(),
                         TotalNumberPassengers = c.Int(nullable: false),
                         CurrentNumberPassengers = c.Int(nullable: false),
+                        Price = c.Double(nullable: false),
                         IsDeleted = c.Boolean(nullable: false),
+                        StatusReady = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -46,7 +48,7 @@ namespace Airline.DAL.Migrations
                         Name = c.String(),
                         Surname = c.String(),
                         PassportID = c.String(),
-                        Birth = c.DateTime(),
+                        Birth = c.DateTime(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             
@@ -56,8 +58,8 @@ namespace Airline.DAL.Migrations
                     {
                         Id = c.Int(nullable: false, identity: true),
                         Text = c.String(),
-                        StatusBefore = c.Boolean(nullable: false),
                         StatusAfter = c.Boolean(nullable: false),
+                        StatusBefore = c.Boolean(nullable: false),
                     })
                 .PrimaryKey(t => t.Id);
             

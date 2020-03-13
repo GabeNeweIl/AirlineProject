@@ -4,15 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
-using Airline.DAL.Entities;
+using Airline.Models.Models;
+
 namespace Airline.DAL.EF
 {
     public class AirlineDbContext : DbContext
     {
         public AirlineDbContext() : base("DefaultConnection") { }
-        DbSet<CrewMember> CrewMembers { get; set; }
-        DbSet<Flight> Flights { get; set; }
-        DbSet<Request> Requests { get; set; }
-        DbSet<Profile> Profiles { get; set; }
+        public DbSet<CrewMember> CrewMembers { get; set; }
+        public DbSet<Flight> Flights { get; set; }
+        public DbSet<Request> Requests { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
     }
 }

@@ -3,41 +3,67 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>Home</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
+    @Html.Partial("_Favicons")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+    <header class="header">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+            <img class="img-fluid logo" src="~/Content/img/logo-plane.png" alt="logo">
+            <a class="navbar-brand" href="~/Home/Index">AZZA-Airline</a>
+            <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div id="my-nav" class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        @Html.ActionLink("Home", "Index", "Home", null, new { @class = "nav-link active" })
+                    </li>
+                    <li class="nav-item">
+                        @if (User.IsInRole("admin"))
+                        {
+                            @Html.ActionLink("All Flights", "AllFlights", "Admin", null, new { @class = "nav-link" })
+                        }
+                        @if (User.IsInRole("dispatcher"))
+                        {
+                            @Html.ActionLink("All Flights", "AllFlightsDispatcher", "Dispatcher", null, new { @class = "nav-link" })
+                        }
+                        @if (User.IsInRole("user") || !User.Identity.IsAuthenticated)
+                        {
+                            @Html.ActionLink("All Flights", "AllFlights", "Home", null, new { @class = "nav-link" })
+                        }
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Information", "About", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.ActionLink("Contacts", "Contact", "Home", null, new { @class = "nav-link" })
+                    </li>
+                    <li class="nav-item">
+                        @Html.Partial("_AdminPartial")
+                        @Html.Partial("_DispatcherPartial")
+                    </li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
-        </div>
-    </div>
-    <div class="container body-content">
+        </nav>
+    </header>
+    <main class="container body-content main">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
-    </div>
-
+    </main>
+    <footer>
+        <div class="container">
+            <hr />
+            <p class="float-right">
+                <a href="#"><img src="~/Content/img/Top.svg" /></a>
+            </p>
+            <p class="float-left">© AZZA-Airline 2020</p>
+        </div>
+    </footer>
     @Scripts.Render("~/bundles/jquery")
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>

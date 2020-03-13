@@ -1,11 +1,12 @@
 ﻿using Airline.DAL.Repository;
-using Airline.DAL.Entities;
+using Airline.Models.Models;
 using Airline.DAL.EF;
 using System.Data.Entity;
+using System;
 
 namespace Airline.DAL.UnitOfWork
 {
-    public class UnitOfWork : IUnitOfWork
+    public class UnitOfWork : IUnitOfWork, IDisposable
     {
         private AirlineDbContext db;
         private Repository<Flight> flightRepository;
@@ -55,6 +56,24 @@ namespace Airline.DAL.UnitOfWork
         public void Save()
         {
             db.SaveChanges();
+        }
+
+        private bool disposed = false;
+        public virtual void Dispose(bool disposing)
+        {
+            if (!this.disposed)
+            {
+                if (disposing)
+                {
+                    db.Dispose();
+                }
+                this.disposed = true;
+            }
+        }
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

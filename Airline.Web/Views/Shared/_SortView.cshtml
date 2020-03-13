@@ -1,0 +1,72 @@
+﻿<div class="dropdown show">
+        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Sort
+        </a>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("Default", "AllFlights", "Admin", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("dispatcher"))
+            {
+                @Html.ActionLink("Default", "AllFlightsDispatcher", "Dispatcher", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("user") || !User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("Default", "AllFlights", "Home", null, new { @class = "dropdown-item" })
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("descending by number", "SortDescendingId", "Admin", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("dispatcher"))
+            {
+                @Html.ActionLink("descending by number", "SortDescendingId", "Dispatcher", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("user") || !User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("descending by number", "SortDescendingId", "Home", null, new { @class = "dropdown-item" })
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("ascending by number", "SortAscendingId", "Admin", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("dispatcher"))
+            {
+                @Html.ActionLink("ascending by number", "SortAscendingId", "Dispatcher", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("user") || !User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("ascending by number", "SortAscendingId", "Home", null, new { @class = "dropdown-item" })
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("descending by price", "SortDescendingPrice", "Admin", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("dispatcher"))
+            {
+                @Html.ActionLink("descending by price", "SortDescendingPrice", "Dispatcher", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("user") || !User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("descending by price", "SortDescendingPrice", "Home", null, new { @class = "dropdown-item" })
+            }
+
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("ascending by price", "SortAscendingPrice", "Admin", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("dispatcher"))
+            {
+                @Html.ActionLink("ascending by price", "SortAscendingPrice", "Dispatcher", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("user") || !User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("ascending by price", "SortAscendingPrice", "Home", null, new { @class = "dropdown-item" })
+            }
+        </div>
+    </div>

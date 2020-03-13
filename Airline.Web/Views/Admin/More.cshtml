@@ -1,0 +1,117 @@
+﻿@using Airline.Models.Models
+@model Airline.Models.Models.Flight
+@{
+    ViewBag.Title = "More";
+}
+@Styles.Render("~/Content/AllFlights.css")
+@Styles.Render("~/Content/AllFlightsAdmin.css")
+<div class="row">
+    <div class="col-md-7">
+        <div class="my-card">
+            <div class="block">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="float-left">
+                            <h6>№: <span>@Model.Id</span></h6>
+                            <h6>From Country: <span>@Model.FromCountry</span></h6>
+                            <h6>From City: <span>@Model.FromCity</span></h6>
+                            <h6>Departure: <span>@Model.Departure.ToShortDateString()</span></h6>
+                        </div>
+                        <div class="float-right">
+                            <h6>To Country: <span>@Model.ToCountry</span></h6>
+                            <h6>To City: <span>@Model.ToCity</span></h6>
+                            <h6>Arrival: <span>@Model.Arrival.ToShortDateString()</span></h6>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="float-left">
+                            <h6>Total number of passenger seats: <span>@Model.TotalNumberPassengers</span></h6>
+                            <h6>Empty seats left: <span>@(Model.TotalNumberPassengers - Model.CurrentNumberPassengers)</span></h6>
+                            <h6>
+                                Status Ready:
+                                @if (Model.StatusReady)
+                                {
+                                    <span>Ready</span>
+                                }
+                                else
+                                {
+                                    <span>Not Ready</span>
+                                }
+                            </h6>
+                            <h6>
+                                Activiti Status:
+                                @if (Model.IsDeleted)
+                                {
+                                    <span>Active</span>
+                                }
+                                else
+                                {
+                                    <span>Deleted</span>
+                                }
+                            </h6>
+                        </div>
+                        <div class="float-right">
+                            <h6>Price for seat: <span class="price">@Model.Price USD</span></h6>
+                        </div>
+                    </div>
+                </div>
+                @if (Model.CrewMembers.Any())
+                {
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Position</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Surname</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+                        @foreach (CrewMember crew in Model.CrewMembers)
+                        {
+                            <tbody>
+                                <tr>
+                                    <td>@crew.Id</td>
+                                    <td>@crew.Position</td>
+                                    <td>@crew.Name</td>
+                                    <td>@crew.Surname</td>
+                                    <td>@crew.Age</td>
+                                    @if (crew.IsDeleted)
+                                    {
+                                        <td>Active</td>
+                                    }
+                                    else
+                                    {
+                                        <td>Inactive</td>
+                                    }
+                                </tr>
+                            </tbody>
+                        }
+                    </table>
+                }
+                @Html.ActionLink("Edit", "EditFlight", "Admin", new { Id = Model.Id }, new { @class = "btn float-right" })
+                @if (Model.IsDeleted)
+                {
+                    @Html.ActionLink("Hide", "HideFlight", "Admin", new { id = Model.Id }, new
+                    {
+                        onclick = "return confirm('Are you sure? Deletion will result in a status change - Inactive!')",
+                        @class = "btn float-right"
+                    })
+                }
+                else
+                {
+                    @Html.ActionLink("Restore", "RestoreFlight", "Admin", new { id = Model.Id },
+                    new
+                         {
+                             onclick = "return confirm('Are you sure? Restorage will result in a status change - Active!')",
+                    @class = "btn float-right"
+                         })
+                }
+                @Html.ActionLink("Delete", "DeleteFlight", "Admin", new { Id = Model.Id },
+               new { onclick = "return confirm('Are you sure? Restorage will result in a status change - Active!')", @class = "btn float-right" })
+            </div>
+        </div>
+    </div>
+</div>
+

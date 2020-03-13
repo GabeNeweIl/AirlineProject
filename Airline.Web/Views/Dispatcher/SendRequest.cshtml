@@ -1,0 +1,29 @@
+﻿@model Airline.Web.Models.SendRequestViewModel
+@{
+    ViewBag.Title = "Send Request";
+}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h2>Send Request</h2>
+            @using (Html.BeginForm("SendRequest", "Dispatcher", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Fill in the data to send request to admin</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Text, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Text, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Text, "It is required field", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Send" class="btn-dark" />
+                    </div>
+                </div>
+            }
+        </div>
+    </div>

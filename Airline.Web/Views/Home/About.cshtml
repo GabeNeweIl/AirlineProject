@@ -1,7 +1,71 @@
 ﻿@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<p>Use this area to provide additional information.</p>
+@Styles.Render("~/Content/About.css")
+<div class="row">
+    <div class="col">
+        <h1 class="title">Information</h1>
+        <div class="font-weight-bold">
+            Hi. We are AZZA-Arline. We are glad that you chosen our airline!. Before flying you should to know some information about us and our rules.
+            We are a passenger airline with a small passenger capacity on our aircraft. We are also the first airline to buy a ticket for our flight.
+            You pay for it immediately before boarding.
+            This means that when booking a place you don’t need to pay anything.
+            just call the passport number on the necessary gate, if you are on the lists, pay for the flight and you can board.
+            Тow you should read the rules of conduct on board.
+        </div>
+        <h3 class="subTitle">Onboard Polices</h3>
+        <div class="list text-left">
+            <p><strong>Passengers have the right to:</strong></p>
+            <ul>
+                <li>personal safety;</li>
+                <li>a decision not to travel if there is reasonable concern about personal safety onboard;</li>
+                <li>to advise our crew member to request assistance when life, health or personal dignity are endangered.</li>
+            </ul>
+            <p><strong>Passengers are required to:</strong></p>
+            <ul>
+                <li>maintain personal discipline and order;</li>
+                <li>ake a seat on board according to the boarding pass;</li>
+                <li>obey all instructions from flight crew;</li>
+                <li>place carry-on luggage and personal belongings in areas specified by flight crew;</li>
+                <li>keep seat belt fastened when the “Fasten Seat Belt” overhead indicator is illuminated.</li>
+            </ul>
+            <p><strong>Passengers are strictly forbidden to:</strong></p>
+            <ul>
+                <li>create situations that threaten flight safety, life, health and personal dignity of other passengers and crew;</li>
+                <li>show disrespect or aggression toward flight crews or passengers, or to behave in a threatening, abusive, insulting or disorderly way;</li>
+                <li>deliberately interfere with the crew in carrying out their duties;</li>
+                <li>consume drugs or other substances causing intoxication;</li>
+                <li>consume alcohol, except drinks offered by the cabin crew;</li>
+                <li>smoke on board, including smoking e-cigarettes;</li>
+                <li>leave seat during take-off and landing;</li>
+                <li>block aisles, service doors or emergency exits;</li>
+                <li>damage equipment or other UIA assets onboard the aircraft;</li>
+                <li>carry any UIA property away from the aircraft or airport;</li>
+                <li>use any emergency rescue equipment and/or emergency exits without the crew's permission;</li>
+                <li>violate rules of electronic devices usage during the flight.</li>
+            </ul>
+            <p><strong>Rules of electronic devices usage during the flight:</strong></p>
+            <ul>
+                <li>radios, portable TV, remote-controlled toys and printers shall not be used at any time when on board the aircraft;</li>
+                <li>laptops, e-readers, video cameras, iPods, CD players, electric shavers, dictaphones or other recording devices shall not be used during taxiing, take-off, approach and landing;</li>
+                <li>
+                    mobile phones must be switched off or to "flight mode" when the aircraft doors are closed, and remain off or in "flight mode" during your entire flight.
+                    After landing, when the aircraft is parked and engines shut down, the use of mobile phones is permitted.
+                </li>
+            </ul>
+            <p><strong>If a passenger fails to follow our regulations, the captain has the right to:</strong></p>
+            <ul>
+                <li>issue directions and orders that are obligatory to follow;</li>
+                <li>apply any reasonable measures, including coercion, to individuals who fail to obey orders and whose behaviour threatens flight safety and security; and</li>
+                <li>land an aircraft at the nearest airport and place offenders under the control of law enforcement authorities.</li>
+            </ul>
+            <p><strong>Passengers whose behaviour warrants it will have the following sanctions applied:</strong></p>
+            <ul>
+                <li>compensation by the passenger of any losses incurred by the delinquency on board;</li>
+                <li>compensation by the passenger of all material losses when the property of UIA is damaged;</li>
+                <li>deprivation of future right to travel on UIA;</li>
+                <li>loss of privacy should UIA publicise the infraction via mass media and the Internet.</li>
+            </ul>
+        </div>
+    </div>
+</div>

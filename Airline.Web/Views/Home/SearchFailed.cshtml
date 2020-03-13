@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Search Failed";
+}
+
+
+<div class="row" style="text-align:center;">
+    <div class="col" style="margin: 0,auto;">
+        @if(User.Identity.IsAuthenticated)
+        {
+            <h1>The search has not given any results</h1>
+        }
+        else
+        {
+            <h1>To use the search you need to log in</h1>
+        }
+    </div>
+</div>

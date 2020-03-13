@@ -18,28 +18,35 @@ namespace Airline.Web.Models
 
             // создаем две роли
             var admin = new IdentityRole { Name = "admin" };
-            var root = new IdentityRole { Name = "root" };
             var dispatcher = new IdentityRole { Name = "dispatcher" };
             var user = new IdentityRole { Name = "user" };
 
-
             // добавляем роли в бд
-            roleManager.Create(root);
             roleManager.Create(admin);
             roleManager.Create(dispatcher);
             roleManager.Create(user);
             // создаем пользователей
-            var rootUser = new ApplicationUser { Email = "smeni0nik@gmail.com", UserName = "smeni0nik@gmail.com" , EmailConfirmed = true};
+            var adminUser = new ApplicationUser { Email = "admin@mailforspam.com", UserName = "admin@mailforspam.com" , EmailConfirmed = true};
+            var dispatcherUser = new ApplicationUser { Email = "dispatcher@mailforspam.com", UserName = "dispatcher@mailforspam.com", EmailConfirmed = true };
+            var userUser = new ApplicationUser { Email = "user1@mailforspam.com", UserName = "user1@mailforspam.com", EmailConfirmed = true };
             string password = "12Qwaszx";
-            var result = userManager.Create(rootUser, password);
-
+            var result = userManager.Create(adminUser, password);
             // если создание пользователя прошло успешно
             if (result.Succeeded)
             {
                 // добавляем для пользователя роль
-                userManager.AddToRole(rootUser.Id, root.Name);
+                userManager.AddToRole(adminUser.Id, admin.Name);
             }
-
+            result = userManager.Create(dispatcherUser, password);
+            if (result.Succeeded)
+            {
+                userManager.AddToRole(dispatcherUser.Id, dispatcher.Name);
+            }
+            result = userManager.Create(userUser, password);
+            if (result.Succeeded)
+            {
+                userManager.AddToRole(userUser.Id, user.Name);
+            }
             base.Seed(context);
         }
     }

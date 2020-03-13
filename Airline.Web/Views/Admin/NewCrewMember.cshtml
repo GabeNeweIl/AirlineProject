@@ -1,0 +1,54 @@
+﻿@model Airline.Web.Models.NewCrewMemberViewModel
+@{
+    ViewBag.Title = "New Crew Member";
+}
+
+    <div class="row">
+        <div class="col-md-10">
+            <h2>New Crew Member</h2>
+            @using (Html.BeginForm("NewCrewMember", "Admin", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+            {
+                @Html.AntiForgeryToken()
+                <h4>Fill in the data to create a new crew member</h4>
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Name, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Surname, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Surname, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Surname, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Age, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        @Html.TextBoxFor(m => m.Age, new { @type = "number", @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Age, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Position, new { @class = "col-md-2 control-label h6" })
+                    <div class="col-md-10">
+                        <p>@Html.RadioButtonFor(model => model.Position, "Pilot") Pilot</p>
+                        <p>@Html.RadioButtonFor(model => model.Position, "Navigator") Navigator</p>
+                        <p>@Html.RadioButtonFor(model => model.Position, "Radio Operator") Radio Operator</p>
+                        <p>@Html.RadioButtonFor(model => model.Position, "Stewardess") Stewardess</p>
+                        @Html.ValidationMessageFor(m => m.Position, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn-dark" />
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>

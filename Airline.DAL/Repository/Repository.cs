@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Airline.DAL.EF;
 using System.Data.Entity;
+using Airline.Models.Models;
 
 namespace Airline.DAL.Repository
 {
@@ -22,15 +23,10 @@ namespace Airline.DAL.Repository
             return dbSet.AsNoTracking().ToList();
         }
 
-        public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
-        {
-            return dbSet.AsNoTracking().Where(predicate).ToList();
-        }
-        public TEntity FindById(int id)
+        public TEntity Get(int id)
         {
             return dbSet.Find(id);
         }
-
         public void Create(TEntity item)
         {
             dbSet.Add(item);

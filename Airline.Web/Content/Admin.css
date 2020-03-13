@@ -1,0 +1,20 @@
+﻿.card {
+    margin: 30px auto;
+}
+
+.card-header {
+    margin: 0 auto;
+}
+
+.card-body {
+    margin: 0 auto;
+}
+
+.col-md-5 {
+    display: inline;
+}
+
+.adminPartial {
+    margin: 0 auto;
+    text-align: center;
+}

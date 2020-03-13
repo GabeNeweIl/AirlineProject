@@ -1,17 +1,39 @@
 ﻿@{
     ViewBag.Title = "Contact";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
-
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
-
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+@Styles.Render("~/Content/Contacts.css")
+<div class="row">
+    <div class="col">
+        <h1 class="title">Contacts</h1>
+        <div class="col-md-6 float-left emailInfo">
+            <h4>In order to leave a review or suggest how to improve our service, please contact</h4>
+            <address>
+                <a href="mailto:smeni0nik@gmail.com" class="badge badge-dark">smeni0nik@@gmail.com</a>
+            </address>
+            <h4>For commercial offers, please contact</h4>
+            <address>
+                <a href="mailto:azza.airline@gmail.com" class="badge badge-dark">azza.airline@@gmail.com</a>
+            </address>
+            <h4>If you notice any violation on the part of our employees, please contact</h4>
+            <address>
+                <a href="mailto:azza.airline.support@gmail.com" class="badge badge-dark">azza.airline.support@@gmail.com</a>
+            </address>
+        </div>
+            <div class="col-md-6 float-right">
+                <h4>Address of our office</h4>
+                <h6>
+                    Avenue of Science, 14, Kharkiv, Kharkiv region, 61000
+                </h6>
+                <div class="shadow-lg p-3 mb-5 bg-white rounded">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2563.816687806022!2d36.22630211548409!3d50.01479097941759!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4127a1243f9e69d1%3A0x6daed05394f03251!2z0KXQsNGA0YzQutC-0LLRgdC60LjQuSDQvdCw0YbQuNC-0L3QsNC70YzQvdGL0Lkg0YPQvdC40LLQtdGA0YHQuNGC0LXRgiDRgNCw0LTQuNC-0Y3Qu9C10LrRgtGA0L7QvdC40LrQuA!5e0!3m2!1sru!2sua!4v1583326956432!5m2!1sru!2sua" width="480" height="320" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+            </div>
+        <div class="justify-content-center icons">
+            <h4>We are in social networks</h4>
+            <a href="https://www.facebook.com/profile.php?id=100003583281653&ref=bookmarks" class="icon" target=" _blank"><img src="~/Content/img/facebook.svg"></a>
+            <a href="https://github.com/GabeNeweIl" class="icon" target="_blank"><img src="~/Content/img/github.svg"></a>
+            <a href="https://instagram.com/colbaster.t_?igshid=11kttvevvg2wo" class="icon" target="_blank"> <img src="~/Content/img/instagram.svg"></a>
+            <a href="https://vk.com/llatpuot" class="icon" target="_blank"> <img src="~/Content/img/vk.png"></a>
+        </div>
+    </div>
+</div>

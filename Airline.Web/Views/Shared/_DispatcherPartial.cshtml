@@ -1,0 +1,4 @@
+﻿@if (User.IsInRole("dispatcher"))
+{
+    @Html.ActionLink("Dispatcher Panel", "DispatcherPanel", "Dispatcher", null, new { @class = "nav-link" })
+}

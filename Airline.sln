@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airline.DAL", "Airline.DAL\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airline.BLL", "Airline.BLL\Airline.BLL.csproj", "{0DE1BE66-0BD4-40E7-BCCA-2876A79851F4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Airline.Models", "Airline.Models\Airline.Models.csproj", "{A35F9E64-54D6-4538-88D7-67296DFECD41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{0DE1BE66-0BD4-40E7-BCCA-2876A79851F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0DE1BE66-0BD4-40E7-BCCA-2876A79851F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0DE1BE66-0BD4-40E7-BCCA-2876A79851F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A35F9E64-54D6-4538-88D7-67296DFECD41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A35F9E64-54D6-4538-88D7-67296DFECD41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A35F9E64-54D6-4538-88D7-67296DFECD41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A35F9E64-54D6-4538-88D7-67296DFECD41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

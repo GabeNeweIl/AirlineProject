@@ -1,0 +1,37 @@
+﻿@using Airline.Models.Models
+@{
+    ViewBag.Title = "Your Booking";
+}
+@Styles.Render("~/Content/UserBooking.css")
+<div class="row">
+    <div class="col-md-7">
+        <h2>Your Booked flights</h2>
+        @foreach(Flight flight in Model.Flights)
+        {
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left">
+                                <h6>№: <span>@flight.Id</span></h6>
+                                <h6>From Country: <span>@flight.FromCountry</span></h6>
+                                <h6>From City: <span>@flight.FromCity</span></h6>
+                                <h6>Departure: <span>@flight.Departure.ToShortDateString()</span></h6>
+                            </div>
+                            <div class="float-right">
+                                <h6>To Country: <span>@flight.ToCountry</span></h6>
+                                <h6>To City: <span>@flight.ToCity</span></h6>
+                                <h6>Arrival: <span>@flight.Arrival.ToShortDateString()</span></h6>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="float-left">
+                                <h6>Total number of passenger seats: <span>@flight.TotalNumberPassengers</span></h6>
+                            </div>
+                            <div class="float-right">
+                                <h6>Price for seat: <span class="price">@flight.Price USD</span></h6>
+                            </div>
+                        </div>
+                    </div>
+        }
+    </div>
+</div>
+
