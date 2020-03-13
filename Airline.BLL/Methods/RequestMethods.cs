@@ -16,7 +16,7 @@ namespace Airline.BLL.Methods
         {
             db = _db;
         }
-        public void StatusDone(int id)
+        public void StatusDone(int id) //управление статусами на выполненно
         {
             db.Requests.Get(id).StatusBefore = true;
             db.Requests.Get(id).StatusAfter = true;
@@ -49,7 +49,7 @@ namespace Airline.BLL.Methods
             return db.Requests.GetCount();
         }
 
-        public void StatusReject(int id)
+        public void StatusReject(int id) //управление статусом на отклоненно
         {
             db.Requests.Get(id).StatusBefore = true;
             db.Requests.Get(id).StatusAfter = false;

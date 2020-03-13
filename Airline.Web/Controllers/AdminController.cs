@@ -133,14 +133,14 @@ namespace Airline.Web.Controllers
         }
         public ActionResult AllFlights(int page=1)
         {
-            int pageSize = 3;
+            int pageSize = 3; //последующие методы для отображения всех рейсов с пагианцией
             IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().Skip((page - 1) * pageSize).Take(pageSize);
             Page pages = new Page { PageNumber = page, PageSize = pageSize, TotalItems = flightMethods.GetCount() };
             PageViewMdodel pageView = new PageViewMdodel { Page = pages, Flights = flightsPerPage };
-            //if (flightsPerPage.Any())
-            return View(pageView);
-            //else 
-            //    return RedirectToAction("NotFound","Home"); //если бд пустая следутет закоментировать строчки 140 142 143
+            if (flightsPerPage.Any())
+                return View(pageView);
+            else
+                return RedirectToAction("NotFound", "Home"); //если бд пустая следутет закоментировать строчки 140 142 143
 
         }
         [HttpGet]
@@ -335,9 +335,8 @@ namespace Airline.Web.Controllers
             else
                 return RedirectToAction("NotFound", "Home");
         }
-        public ActionResult AllLogs()
+        public ActionResult AllLogs() // чтения лога из тхт файла
         {
-            //string path = @"/logs/Logs.log";
             string path = HostingEnvironment.MapPath("/logs/Logs.log");
             List<string> logs = new List<string>();
             using (StreamReader sr = new StreamReader(path, System.Text.Encoding.Default))
@@ -352,7 +351,7 @@ namespace Airline.Web.Controllers
             return View(logs);
         }
         [HttpPost]
-        public ActionResult SearchLog(string search)
+        public ActionResult SearchLog(string search) //поиск по логам
         {
             string path = HostingEnvironment.MapPath("/logs/Logs.log");
             List<string> logs = new List<string>();

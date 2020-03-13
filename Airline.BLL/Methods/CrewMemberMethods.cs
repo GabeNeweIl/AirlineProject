@@ -41,7 +41,7 @@ namespace Airline.BLL.Methods
             IEnumerable<CrewMember> crewMembers = db.CrewMembers.GetAll().Where(x => x.IsDeleted == true);
             return crewMembers;
         }
-        public void SoftDelete(int id)
+        public void SoftDelete(int id) // изменениея статуса на удален
         {
             int? check = id;
             if (check != null && check > 0)
@@ -51,7 +51,7 @@ namespace Airline.BLL.Methods
                 db.Save();
             }
         }
-        public void Restore(int id)
+        public void Restore(int id) //восстановления статуса из удален
         {
             int? check = id;
             if (check != null && check > 0)
@@ -77,7 +77,7 @@ namespace Airline.BLL.Methods
         {
             return db.CrewMembers.GetCount();
         }
-        public void Delete(int id)
+        public void Delete(int id) //полное удаление
         {
             int? check = id;
             if (check != null && check > 0)

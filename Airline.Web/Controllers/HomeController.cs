@@ -40,7 +40,7 @@ namespace Airline.Web.Controllers
         {
             return View();
         }
-        public ActionResult Search(Search search)
+        public ActionResult Search(Search search) //полный поиск по рейсам
         {
             if (ModelState.IsValid)
             {
@@ -66,7 +66,7 @@ namespace Airline.Web.Controllers
             else
                 return RedirectToAction("SearchFailed", "Home");
         }
-        public ActionResult SearchByNumber(SearchByNumber search)
+        public ActionResult SearchByNumber(SearchByNumber search) //поиск рейса по номеру
         {
             if (ModelState.IsValid)
             {
@@ -148,10 +148,10 @@ namespace Airline.Web.Controllers
                 return RedirectToAction("NotFound", "Home");
         }
         [Authorize(Roles = "user")]
-        public ActionResult Book(int id)
+        public ActionResult Book(int id) //бронирование рейса для пользователя
         {
-            //try
-            //{
+            try
+            {
                 int profileId = ProfileMethods.GetByEmail(User.Identity.Name);
                 Profile profile = ProfileMethods.Get(profileId);
                 Flight flight = flightMethods.Get(id);
@@ -176,14 +176,14 @@ namespace Airline.Web.Controllers
                 }
                 else
                     return RedirectToAction("FillProfile", "Home");
-            //}
-            //catch (Exception)
-            //{
-            //    return RedirectToAction("FillProfile", "Home");
-            //}
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("FillProfile", "Home");
+            }   
         }
         [Authorize(Roles ="user")]
-        public ActionResult UserBooking()
+        public ActionResult UserBooking() //отображение всех забронированых рейсов для пользователя
         {
             int id = ProfileMethods.GetByEmail(User.Identity.Name);
             Profile profile = ProfileMethods.Get(id);
@@ -197,7 +197,7 @@ namespace Airline.Web.Controllers
         }
         [Authorize(Roles = "user")]
         [HttpPost]
-        public ActionResult FillProfile(ProfileViewModel _profile)
+        public ActionResult FillProfile(ProfileViewModel _profile) //если у пользователя не заполнен профиль перенапрвляет на это действие
         {
             if (ModelState.IsValid && _profile.Birth < DateTime.Now)
             {
@@ -216,7 +216,7 @@ namespace Airline.Web.Controllers
                 return View(_profile);
         }
         [Authorize(Roles = "user")]
-        public ActionResult ProfileView()
+        public ActionResult ProfileView() //отображение информации о пользователе
         {
             try
             {
@@ -231,13 +231,13 @@ namespace Airline.Web.Controllers
         }
         [Authorize(Roles = "user")]
         [HttpGet]
-        public ActionResult UserEdit()
+        public ActionResult UserEdit() 
         {
             return View();
         }
         [Authorize(Roles = "user")]
         [HttpPost]
-        public ActionResult UserEdit(ProfileViewModel _profile)
+        public ActionResult UserEdit(ProfileViewModel _profile) //редактирование профиля
         {
             if (ModelState.IsValid && _profile.Birth < DateTime.Now)
             {

@@ -6,7 +6,7 @@ using Airline.Web.Models;
 
 namespace Airline.Web.App_Code
 {
-    public static class PagingHelper
+    public static class PagingHelper //хелпер для пагинации
     {
         public static MvcHtmlString PageLinks(this HtmlHelper html,
         Page pageInfo, Func<int, string> pageUrl)

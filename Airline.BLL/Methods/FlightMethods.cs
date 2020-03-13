@@ -46,7 +46,7 @@ namespace Airline.BLL.Methods
             IEnumerable<Flight> flights = db.Flights.GetAll().Where(x => x.IsDeleted == true);
             return flights;
         }
-        public void SoftDelete(int id)
+        public void SoftDelete(int id) //изменения статуса на удален
         {
             int? check = id;
             if (check != null && check > 0)
@@ -56,7 +56,7 @@ namespace Airline.BLL.Methods
                 db.Save();
             }
         }
-        public void Restore(int id)
+        public void Restore(int id) //восстановление из статуса удален
         {
             int? check = id;
             if (check != null && check > 0)
@@ -82,7 +82,7 @@ namespace Airline.BLL.Methods
         {
             return db.Flights.GetCount();
         }
-        public void CrewAssigment(Flight flight)
+        public void CrewAssigment(Flight flight) //добавление экипажа к рейсу и назначение статуса ready
         {
             if (flight != null)
             {
@@ -91,7 +91,7 @@ namespace Airline.BLL.Methods
                 db.Save();
             }
         }
-        public void Ready(int id)
+        public void Ready(int id) //измененеия статуса на ready
         {
             int? check = id;
             if (check != null && id > 0)
@@ -101,7 +101,7 @@ namespace Airline.BLL.Methods
                 db.Save();
             }
         }
-        public void Unready(int id)
+        public void Unready(int id) //измененеия статуса на unready
         {
             int? check = id;
             if (check != null && id > 0)
@@ -111,7 +111,7 @@ namespace Airline.BLL.Methods
                 db.Save();
             }
         }
-        public void Delete(int id)
+        public void Delete(int id) //полное удаление
         {
             int? check = id;
             if (check != null && check > 0)

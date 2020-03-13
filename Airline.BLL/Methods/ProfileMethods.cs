@@ -39,7 +39,7 @@ namespace Airline.BLL.Methods
         {
             return db.Profiles.Get(id);
         }
-        public int GetByEmail(string email)
+        public int GetByEmail(string email) //возвращает id профиля через email авторизированого пользователя
         {
             int id = db.Profiles.GetAll().First(x => x.Email == email).Id;
             return id;

@@ -35,7 +35,7 @@ namespace Airline.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult SendRequest(SendRequestViewModel send)
+        public ActionResult SendRequest(SendRequestViewModel send) //отправление запроса админу 
         {
             if (ModelState.IsValid)
             {
@@ -65,7 +65,7 @@ namespace Airline.Web.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AssignCrew(AssignCrewViewModel assign)
+        public ActionResult AssignCrew(AssignCrewViewModel assign) //назначение экипажа на рейса
         {
             ViewBag.AllCrewMembers = crewMember.GetAll();
             if (ModelState.IsValid)
@@ -86,19 +86,19 @@ namespace Airline.Web.Controllers
             else
                 return View(assign);
         }
-        public ActionResult Ready(int id)
+        public ActionResult Ready(int id) //управление статусом на ready для рейса
         {
             flightMethods.Ready(id);
             logger.Info($"Flight Id {id} get status READY By: {HttpContext.User.Identity.Name}");
             return RedirectToAction("AllFlightsDispatcher", "Dispatcher");
         }
-        public ActionResult Unready(int id)
+        public ActionResult Unready(int id) //управление статусом на unready для рейса
         {
             flightMethods.Unready(id);
             logger.Info($"Flight Id {id} get status UNREADY By: {HttpContext.User.Identity.Name}");
             return RedirectToAction("AllFlightsDispatcher", "Dispatcher");
         }
-        public ActionResult More(int id)
+        public ActionResult More(int id) //отображение полной информации о рейсе
         {
             int? check = id;
             if (check != null & check > 0)
