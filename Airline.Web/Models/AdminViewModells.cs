@@ -61,7 +61,8 @@ namespace Airline.Web.Models
         [Display(Name = "Price")]
         public double Price { get; set; }
         [Required]
-        [Display(Name = "Total numbers of passangers")]
+        [Range(1,100)]
+        [Display(Name = "Total number of passangers")]
         public int Total { get; set; }
 
     }

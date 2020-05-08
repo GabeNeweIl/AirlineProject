@@ -27,12 +27,12 @@ namespace Airline.Web.Controllers
         // GET: Dispatcher
         public ActionResult DispatcherPanel()
         {
-            return View();
+            return View("DispatcherPanel");
         }
         [HttpGet]
         public ActionResult SendRequest()
         {
-            return View();
+            return View("SendRequest");
         }
         [HttpPost]
         public ActionResult SendRequest(SendRequestViewModel send) //отправление запроса админу 
@@ -52,7 +52,8 @@ namespace Airline.Web.Controllers
         public ActionResult AllFlightsDispatcher(int page=1)
         {
             int pageSize = 3;
-            IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().Where(x => x.IsDeleted == true).Skip((page - 1) * pageSize).Take(pageSize);
+            IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().Where(x => x.IsDeleted == true).OrderByDescending(x => x.Id)
+                .Skip((page - 1) * pageSize).Take(pageSize);
             IEnumerable<Flight> flightsCount = flightMethods.GetAll().Where(x => x.IsDeleted == true);
             Page pages = new Page { PageNumber = page, PageSize = pageSize, TotalItems = flightsCount.Count() };
             PageViewMdodel pageView = new PageViewMdodel { Page = pages, Flights = flightsPerPage };
@@ -72,10 +73,10 @@ namespace Airline.Web.Controllers
             {
                 List<CrewMember> crew = new List<CrewMember>()
                 {
-                    crewMember.Get(assign.PilotId),
-                    crewMember.Get(assign.NavigatorId),
-                    crewMember.Get(assign.RadioOperatorId),
-                    crewMember.Get(assign.StewardessId)
+                    crewMember.Get((int)assign.PilotId),
+                    crewMember.Get((int)assign.NavigatorId),
+                    crewMember.Get((int)assign.RadioOperatorId),
+                    crewMember.Get((int)assign.StewardessId)
                 };
                 Flight flight = flightMethods.Get(assign.Id);
                 flight.CrewMembers = crew;
@@ -125,10 +126,10 @@ namespace Airline.Web.Controllers
             {
                 List<CrewMember> crew = new List<CrewMember>()
                 {
-                    crewMember.Get(assign.PilotId),
-                    crewMember.Get(assign.NavigatorId),
-                    crewMember.Get(assign.RadioOperatorId),
-                    crewMember.Get(assign.StewardessId)
+                    crewMember.Get((int)assign.PilotId),
+                    crewMember.Get((int)assign.NavigatorId),
+                    crewMember.Get((int)assign.RadioOperatorId),
+                    crewMember.Get((int)assign.StewardessId)
                 };
                 flight.CrewMembers = crew;
                 flightMethods.CrewAssigment(flight);

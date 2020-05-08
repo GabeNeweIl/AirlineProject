@@ -17,7 +17,7 @@ namespace Airline.Web.Models
         public string To { get; set; }
         [Required]
         [Display(Name = "Date of arrival")]
-        public DateTime DateDeparture { get; set; }
+        public DateTime? DateDeparture { get; set; }
     }
     public class SearchByNumber
     {

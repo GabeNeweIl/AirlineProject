@@ -17,15 +17,15 @@ namespace Airline.Web.Models
         public int Id { get; set; }
         [Required]
         [Display(Name="Pilot")]
-        public int PilotId { get; set; }
+        public int? PilotId { get; set; }
         [Required]
         [Display(Name = "RadioOperator")]
-        public int RadioOperatorId { get; set; }
+        public int? RadioOperatorId { get; set; }
         [Required]
         [Display(Name = "Navigator")]
-        public int NavigatorId { get; set; }
+        public int? NavigatorId { get; set; }
         [Required]
         [Display(Name = "Stewardess")]
-        public int StewardessId { get; set; }
+        public int? StewardessId { get; set; }
     }
 }

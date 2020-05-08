@@ -20,51 +20,67 @@ namespace Airline.Web.Controllers
         }
         public ActionResult Index()
         {
-            return View();
+            return View("Index");
         }
 
         public ActionResult About()
         {
-            return View();
+            return View("About");
         }
 
         public ActionResult Contact()
         {
-            return View();
+            return View("Contact");
         }
         public ActionResult NoResults()
         {
-            return View();
+            return View("NoResults");
         }
         public ActionResult SearchFailed()
         {
-            return View();
+            return View("SearchFailed");
         }
         public ActionResult Search(Search search) //полный поиск по рейсам
         {
-            if (ModelState.IsValid)
-            {
+            //if (ModelState.IsValid)
+            //{
                 try
                 {
-                    Flight flight = flightMethods.GetAll().First(x => x.FromCity.ToLower() == search.From.ToLower() &&
-                    x.ToCity.ToLower() == search.To.ToLower() &&
-                    x.Departure.ToShortDateString() == search.DateDeparture.ToShortDateString());
-                    if (User.IsInRole("admin"))
-                        return RedirectToAction("More", "Admin", new { Id = flight.Id });
-                    if (User.IsInRole("dispatcher"))
-                        return RedirectToAction("More", "Dispatcher", new { Id = flight.Id });
-                    if (User.IsInRole("user"))
-                        return RedirectToAction("More", "Home", new { id = flight.Id });
-                    else
-                        return RedirectToAction("SearchFailed", "Home");
+                    if (search.DateDeparture != null)
+                    {
+                        Flight flight = flightMethods.GetAll().First(x => x.FromCity.ToLower() == search.From.ToLower() &&
+                            x.ToCity.ToLower() == search.To.ToLower() &&
+                            x.Departure == search.DateDeparture);
+                        if (User.IsInRole("admin"))
+                            return RedirectToAction("More", "Admin", new { Id = flight.Id });
+                        if (User.IsInRole("dispatcher"))
+                            return RedirectToAction("More", "Dispatcher", new { Id = flight.Id });
+                        if (User.IsInRole("user"))
+                            return RedirectToAction("More", "Home", new { id = flight.Id });
+                        else
+                            return RedirectToAction("SearchFailed", "Home");
+                }
+                else
+                    {
+                        Flight flight = flightMethods.GetAll().First(x => x.FromCity.ToLower() == search.From.ToLower() &&
+                            x.ToCity.ToLower() == search.To.ToLower());
+                        if (User.IsInRole("admin"))
+                            return RedirectToAction("More", "Admin", new { Id = flight.Id });
+                        if (User.IsInRole("dispatcher"))
+                            return RedirectToAction("More", "Dispatcher", new { Id = flight.Id });
+                        if (User.IsInRole("user"))
+                            return RedirectToAction("More", "Home", new { id = flight.Id });
+                        else
+                            return RedirectToAction("SearchFailed", "Home");
+                    }
                 }
                 catch (InvalidOperationException)
                 {
                     return RedirectToAction("SearchFailed", "Home");
                 }
-            }
-            else
-                return RedirectToAction("SearchFailed", "Home");
+            //}
+            //else
+            //    return RedirectToAction("SearchFailed", "Home");
         }
         public ActionResult SearchByNumber(SearchByNumber search) //поиск рейса по номеру
         {
@@ -138,7 +154,8 @@ namespace Airline.Web.Controllers
         public ActionResult AllFlights(int page = 1)
         {
             int pageSize = 3;
-            IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().Where(x => x.Departure > DateTime.Now).Skip((page - 1) * pageSize).Take(pageSize);
+            IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().Where(x => x.Departure > DateTime.Now).OrderByDescending(x => x.Id)
+                .Skip((page - 1) * pageSize).Take(pageSize);
             IEnumerable<Flight> flightsCount = flightMethods.GetAll().Where(x => x.Departure > DateTime.Now);
             Page pages = new Page { PageNumber = page, PageSize = pageSize, TotalItems = flightsCount.Count() };
             PageViewMdodel pageView = new PageViewMdodel { Page = pages, Flights = flightsPerPage };

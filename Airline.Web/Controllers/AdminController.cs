@@ -32,12 +32,12 @@ namespace Airline.Web.Controllers
         }
         public ActionResult AllCrewMembers()
         {
-            return View(crewMember.GetAll());
+            return View("AllCrewMembers",crewMember.GetAll());
         }
         [HttpGet]
         public ActionResult NewCrewMember()
         {
-            return View();
+            return View("NewCrewMember");
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -134,7 +134,7 @@ namespace Airline.Web.Controllers
         public ActionResult AllFlights(int page=1)
         {
             int pageSize = 3; //последующие методы для отображения всех рейсов с пагианцией
-            IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().Skip((page - 1) * pageSize).Take(pageSize);
+            IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().OrderByDescending(x => x.Id).Skip((page - 1) * pageSize).Take(pageSize);
             Page pages = new Page { PageNumber = page, PageSize = pageSize, TotalItems = flightMethods.GetCount() };
             PageViewMdodel pageView = new PageViewMdodel { Page = pages, Flights = flightsPerPage };
             if (flightsPerPage.Any())
@@ -154,7 +154,7 @@ namespace Airline.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (_flight.Arraival > DateTime.Now && _flight.Departure > DateTime.Now && _flight.Arraival > _flight.Departure
+                if (_flight.Arraival > DateTime.Now && _flight.Departure > DateTime.Now && _flight.Arraival >= _flight.Departure
                     && _flight.Price > 0 && _flight.Total > 0 && _flight.Total < 100)
                 {
                     Flight flight = new Flight
@@ -174,7 +174,12 @@ namespace Airline.Web.Controllers
                     return RedirectToAction("AllFlights", "Admin");
                 }
                 else
-                    ModelState.AddModelError("", "Date must be in future");
+                {
+                    ModelState.AddModelError("", "Check inptu data. Date must in future. Max passanger must be less then 100");
+                    ModelState.IsValidField("");
+                    return View(_flight);
+                }
+
             }
             else
                 ModelState.AddModelError("", "Fill in all gaps, Date must be in future");
@@ -183,14 +188,15 @@ namespace Airline.Web.Controllers
         [HttpGet]
         public ActionResult EditFlight()
         {
-            return View();
+            return View("EditFlight");
         }
         [HttpPost]
         public ActionResult EditFlight(EditFlightViewModel _flight)
         {
             if (_flight.Id > 0)
             {
-                if (_flight.Arraival > DateTime.Now && _flight.Departure > DateTime.Now && _flight.Price > 0 && _flight.Total > 0)
+                if (_flight.Arraival > DateTime.Now && _flight.Departure > DateTime.Now && _flight.Price > 0 && _flight.Total > 0
+                    && _flight.Arraival >= _flight.Departure)
                 {
                     Flight flight = flightMethods.Get(_flight.Id);
                     flight.Departure = _flight.Departure;
@@ -328,6 +334,18 @@ namespace Airline.Web.Controllers
         {
             int pageSize = 3;
             IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().OrderBy(x => x.Price).Skip((page - 1) * pageSize).Take(pageSize);
+            Page pages = new Page { PageNumber = page, PageSize = pageSize, TotalItems = flightMethods.GetCount() };
+            PageViewMdodel pageView = new PageViewMdodel { Page = pages, Flights = flightsPerPage };
+            if (flightsPerPage.Any())
+                return View(pageView);
+            else
+                return RedirectToAction("NotFound", "Home");
+        }
+        public ActionResult SortByCountryAndCity(int page=1)
+        {
+            int pageSize = 3;
+            IEnumerable<Flight> flightsPerPage = flightMethods.GetAll().OrderBy(x => x.FromCountry).ThenBy(x => x.FromCity)
+                .Skip((page - 1) * pageSize).Take(pageSize);
             Page pages = new Page { PageNumber = page, PageSize = pageSize, TotalItems = flightMethods.GetCount() };
             PageViewMdodel pageView = new PageViewMdodel { Page = pages, Flights = flightsPerPage };
             if (flightsPerPage.Any())

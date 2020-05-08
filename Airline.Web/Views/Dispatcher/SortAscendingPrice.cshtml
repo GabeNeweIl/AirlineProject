@@ -6,7 +6,7 @@
 }
 @Styles.Render("~/Content/AllFlights.css")
 <div class="row">
-    <div class="col">
+    <div class="col-md-7">
         <h2 class="title">Flights</h2>
         <p style="padding-bottom: 10px;">@Html.Partial("_SortView")</p>
         @foreach (Flight flight in Model.Flights)

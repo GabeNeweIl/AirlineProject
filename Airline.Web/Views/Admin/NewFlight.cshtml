@@ -39,12 +39,14 @@
                     @Html.TextBoxFor(m => m.FromCity, new { @class = "form-control" })
                     @Html.ValidationMessageFor(m => m.FromCity, "", new { @class = "text-danger" })
                 </div>
+            </div>
                 <div class="form-group">
                     @Html.LabelFor(m => m.ToCountry, new { @class = "col-md-2 control-label h6" })
                     <div class="col-md-10">
                         @Html.TextBoxFor(m => m.ToCountry, new { @class = "form-control" })
                         @Html.ValidationMessageFor(m => m.ToCountry, "", new { @class = "text-danger" })
                     </div>
+                </div>
                     <div class="form-group">
                         @Html.LabelFor(m => m.ToCity, new { @class = "col-md-2 control-label h6" })
                         <div class="col-md-10">
@@ -66,8 +68,6 @@
                             @Html.ValidationMessageFor(m => m.Total, "", new { @class = "text-danger" })
                         </div>
                     </div>
-                </div>
-            </div>
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Create" class="btn-dark" />

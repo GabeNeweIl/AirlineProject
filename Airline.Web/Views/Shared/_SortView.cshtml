@@ -68,5 +68,18 @@
             {
                 @Html.ActionLink("ascending by price", "SortAscendingPrice", "Home", null, new { @class = "dropdown-item" })
             }
+
+            @if (User.IsInRole("admin"))
+            {
+                @Html.ActionLink("by deprature from country and city", "SortByCountryAndCity", "Admin", null, new { @class = "dropdown-item" })
+            }
+            @*@if (User.IsInRole("dispatcher"))
+            {
+                @Html.ActionLink("by deprature from country and city", "SortByCountryAndCity", "Dispatcher", null, new { @class = "dropdown-item" })
+            }
+            @if (User.IsInRole("user") || !User.Identity.IsAuthenticated)
+            {
+                @Html.ActionLink("by deprature from country and city", "SortByCountryAndCity", "Home", null, new { @class = "dropdown-item" })
+            }*@
         </div>
     </div>

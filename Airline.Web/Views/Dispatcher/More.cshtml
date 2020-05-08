@@ -47,41 +47,41 @@
         </div>
         @*@if (Model.CrewMembers != null)
         {*@
-            @if (Model.CrewMembers.Any())
-            {
-                <table class="table">
-                    <thead>
+        @if (Model.CrewMembers.Any())
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Position</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Surname</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                @foreach (CrewMember crew in Model.CrewMembers)
+                {
+                    <tbody>
                         <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Position</th>
-                            <th scope="col">Name</th>
-                            <th scope="col">Surname</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Status</th>
+                            <td>@crew.Id</td>
+                            <td>@crew.Position</td>
+                            <td>@crew.Name</td>
+                            <td>@crew.Surname</td>
+                            <td>@crew.Age</td>
+                            @if (crew.IsDeleted)
+                            {
+                                <td>Active</td>
+                            }
+                            else
+                            {
+                                <td>Inactive</td>
+                            }
                         </tr>
-                    </thead>
-                    @foreach (CrewMember crew in Model.CrewMembers)
-                    {
-                        <tbody>
-                            <tr>
-                                <td>@crew.Id</td>
-                                <td>@crew.Position</td>
-                                <td>@crew.Name</td>
-                                <td>@crew.Surname</td>
-                                <td>@crew.Age</td>
-                                @if (crew.IsDeleted)
-                                {
-                                    <td>Active</td>
-                                }
-                                else
-                                {
-                                    <td>Inactive</td>
-                                }
-                            </tr>
-                        </tbody>
-                    }
-                </table>
-            }
+                    </tbody>
+                }
+            </table>
+        }
         @*}*@
 
         @if (Model.StatusReady)
@@ -92,10 +92,13 @@
         {
             @Html.ActionLink("Ready", "Ready", "Dispatcher", new { Id = Model.Id }, new { @class = "btn float-right assign" });
         }
-        @Html.ActionLink("Assign Crew", "AssignCrew", "Dispatcher", new { Id = Model.Id }, new { @class = "btn float-right assign" })
         @if (Model.CrewMembers.Any())
         {
             @Html.ActionLink("Edit", "EditCrew", "Dispatcher", new { Id = Model.Id }, new { @class = "btn float-right assign" });
+        }
+        else
+        {
+            @Html.ActionLink("Assign Crew", "AssignCrew", "Dispatcher", new { Id = Model.Id }, new { @class = "btn float-right assign" })
         }
     </div>
 </div>
